@@ -5,16 +5,21 @@
 class Jgrep < Formula
   desc "Homebrew distibution of jgrep, the ultimate JSON (and YAML) grep`er."
   homepage "https://github.com/frese/jgrep"
-  version "0.1.6"
+  version "0.1.7"
   bottle :unneeded
 
-  if OS.mac? && Hardware::CPU.intel?
-    url "https://github.com/frese/jgrep/releases/download/v0.1.6/jgrep_0.1.6_darwin_x86_64.tar.gz"
-    sha256 "4fa6c4d086a0e97a733c29c16371205cad25c643f77f17745cf14d2d35a121ba"
+  on_macos do
+    if Hardware::CPU.intel?
+      url "https://github.com/frese/jgrep/releases/download/v0.1.7/jgrep_0.1.7_darwin_x86_64.tar.gz"
+      sha256 "53f6ea9c67d3ba653a5f7adc7e8e77d225e65bf7b61626e66f85f1e8fdd86ce7"
+    end
   end
-  if OS.linux? && Hardware::CPU.intel?
-    url "https://github.com/frese/jgrep/releases/download/v0.1.6/jgrep_0.1.6_linux_x86_64.tar.gz"
-    sha256 "1ba48f42944e40b87e040763f460575f60e1a1980ec058f6a3a09a385ed7ed6c"
+
+  on_linux do
+    if Hardware::CPU.intel?
+      url "https://github.com/frese/jgrep/releases/download/v0.1.7/jgrep_0.1.7_linux_x86_64.tar.gz"
+      sha256 "fdabc88f9987fec9fb376ad03e06f7635d579f6a54f2431b81dfc7a7b6d3bdad"
+    end
   end
 
   def install
