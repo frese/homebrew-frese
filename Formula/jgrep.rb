@@ -5,24 +5,35 @@
 class Jgrep < Formula
   desc "Homebrew distibution of jgrep, the ultimate JSON (and YAML) grep`er."
   homepage "https://github.com/frese/jgrep"
-  version "0.1.9"
-  bottle :unneeded
+  version "0.2.0"
 
   on_macos do
-    if Hardware::CPU.intel?
-      url "https://github.com/frese/jgrep/releases/download/v0.1.9/jgrep_0.1.9_darwin_x86_64.tar.gz"
-      sha256 "3f83c43b0240b2386ae8fe3f59058ba57308e40c26216ccfe7b40c520d277544"
+    url "https://github.com/frese/jgrep/releases/download/v0.2.0/jgrep_0.2.0_darwin_x86_64.tar.gz"
+    sha256 "151be000699bfdcee93140f213c3c25d923fbee6823112a041e62cb7dca5923a"
+
+    def install
+      bin.install "jgrep"
+    end
+
+    if Hardware::CPU.arm?
+      def caveats
+        <<~EOS
+          The darwin_arm64 architecture is not supported for the Jgrep
+          formula at this time. The darwin_amd64 binary may work in compatibility
+          mode, but it might not be fully supported.
+        EOS
+      end
     end
   end
 
   on_linux do
     if Hardware::CPU.intel?
-      url "https://github.com/frese/jgrep/releases/download/v0.1.9/jgrep_0.1.9_linux_x86_64.tar.gz"
-      sha256 "e9c623e0b54612bd2bd8a748064621c20d5c9d19ebea0061d3f544218d91b27c"
-    end
-  end
+      url "https://github.com/frese/jgrep/releases/download/v0.2.0/jgrep_0.2.0_linux_x86_64.tar.gz"
+      sha256 "e947a8a47f23b03f44f03f003413983874a114eafcff7487835ae97d894a4a05"
 
-  def install
-    bin.install "jgrep"
+      def install
+        bin.install "jgrep"
+      end
+    end
   end
 end
